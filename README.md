@@ -1,8 +1,13 @@
-# servicelocator
+# service-oracle
 
-A service locator.
+A service locator. 
+
+The all-knowing Oracle knows *all* about your services!
 
 ### This project is a Work In Progress. Here be dragons!
+
+<small>Crap name I know, `service-locator` was taken but you can suggest something better.</small>
+
 
 ## API
 
@@ -24,7 +29,7 @@ Get a shared instance of a service.
 
 Set a shared instance of a service.
 
-#### .setFactory(name : string, value : string|function(ServiceLocator) : ServiceLocator
+#### .factory(name : string, value : string|function(ServiceLocator) : ServiceLocator
 
 Set a function or module path as a service factory.
  
