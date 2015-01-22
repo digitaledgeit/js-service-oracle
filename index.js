@@ -4,9 +4,18 @@
  * @constructor
  */
 function ServiceLocator() {
+
+	if (!(this instanceof ServiceLocator)) {
+		return new ServiceLocator();
+	}
+
 	this._services  = [];
 	this._factories = [];
 }
+
+ServiceLocator.create = function() {
+	return new ServiceLocator();
+};
 
 ServiceLocator.prototype = {
 
