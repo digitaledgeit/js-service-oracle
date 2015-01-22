@@ -2,6 +2,7 @@
 /**
  * A service locator
  * @constructor
+ * @returns {ServiceLocator}
  */
 function ServiceLocator() {
 
@@ -13,6 +14,10 @@ function ServiceLocator() {
 	this._factories = [];
 }
 
+/**
+ * Creates a new service locator
+ * @returns {ServiceLocator}
+ */
 ServiceLocator.create = function() {
 	return new ServiceLocator();
 };
