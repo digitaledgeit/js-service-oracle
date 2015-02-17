@@ -33,11 +33,9 @@ Set a shared instance of a service.
 
 Set a function or module path as a service factory.
  
-
-
-What should I store in the locator.
-What kind of services should I use it.
-What about dependency injection?
-
-TODO:
-    - how to handle async stuff?
+## TODO:
+- async factories?
+- documentation:
+    - What should I store in the locator?
+    - What kind of services should I use it?
+    - What about dependency injection?

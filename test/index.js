@@ -20,4 +20,8 @@ describe('servicelocator', function() {
 
 	});
 
+	describe('.locator()', function() {
+
+	});
+
 });

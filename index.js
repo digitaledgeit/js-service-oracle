@@ -12,14 +12,18 @@ function ServiceLocator() {
 
 	this._services  = [];
 	this._factories = [];
+
 }
 
 /**
  * Creates a new service locator
+ * @param   {function(ServiceLocator)} [bootstrap]
  * @returns {ServiceLocator}
  */
-ServiceLocator.create = function() {
-	return new ServiceLocator();
+ServiceLocator.create = function(bootstrap) {
+	var locator = new ServiceLocator();
+	if (bootstrap) bootstrap(locator);
+	return locator;
 };
 
 ServiceLocator.prototype = {
