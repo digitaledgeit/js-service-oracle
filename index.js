@@ -49,6 +49,41 @@ ServiceLocator.prototype = {
 	},
 
 	/**
+	 * Retrieve a new instance of a service from the service locator - can only be used for services created via a factory
+	 * @param   {string}                            name       The service name
+	 * @returns {*}
+	 */
+	new: function(name) {
+
+		//check for a factory to create a new instance of the service
+		if (Object.keys(this._factories).indexOf(name) !== -1) {
+
+			var
+				service,
+				factory = this._factories[name]
+			;
+
+			//if the factory is a path to a module/file then try and load it
+			if (typeof(factory) === 'string') {
+
+				try {
+					factory = require(factory);
+				} catch (err) {
+					var error = new Error('Cannot locate the factory for a service named "'+name+'" at "'+factory+'".');
+					error.previous = err;
+					throw error;
+				}
+
+			}
+
+			//run the factory, create an instance of the service and store it for next time
+			return factory(this);
+		}
+
+		throw new Error('Cannot locate a factory to create a new service named "'+name+'".');
+	},
+
+	/**
 	 * Retrieve a service from the service locator
 	 * @param   {string}                            name       The service name
 	 * @returns {*}

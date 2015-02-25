@@ -21,6 +21,12 @@ Create a new service locator.
 
 Check whether a service exists.
 
+#### .new(name : string) : *
+
+Create a new instance of a service.
+
+**Note**: Cannot be a service set with `.set()`
+
 #### .get(name : string) : *
 
 Get a shared instance of a service.

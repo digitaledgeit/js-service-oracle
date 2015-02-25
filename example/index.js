@@ -18,5 +18,7 @@ locator
 	})
 ;
 
-var face = locator.get('Face');
-console.log(face);
+var face1 = locator.get('Face');
+var face2 = locator.get('Face');
+var face3 = locator.new('Face');
+console.log(face1 === face2 !== face3);
