@@ -36,8 +36,8 @@ The all-knowing Oracle knows *all* about your services!
     		return posts;
     	})
     	.factory('BlogService', function(locator) {
-    		var users     = locator.get('Config');
-    		var posts     = locator.get('Config');
+    		var users     = locator.get('Users');
+    		var posts     = locator.get('Posts');
     		var service   = new BlogService(users, posts);
     		return service;
     	})
