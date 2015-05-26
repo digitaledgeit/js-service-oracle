@@ -12,6 +12,7 @@ function ServiceLocator() {
 
 	this._services  = [];
 	this._factories = [];
+  this._locators  = [];
 
 }
 
@@ -44,6 +45,11 @@ ServiceLocator.prototype = {
 		if (Object.keys(this._factories).indexOf(name) !== -1) {
 			return true;
 		}
+
+    //check for a locator with an instance of the service
+    if (Object.keys(this._locators).indexOf(name) !== -1) {
+      return true;
+    }
 
 		return false;
 	},
@@ -79,6 +85,13 @@ ServiceLocator.prototype = {
 			//run the factory, create an instance of the service and store it for next time
 			return factory(this);
 		}
+
+    //check for a locator to create a new instance of the service
+    for (var i=0; i<this._locators.length; ++i) {
+      if (this._locators[i].has(name)) {
+        return this._locators[i].new(name);
+      }
+    }
 
 		throw new Error('Cannot locate a factory to create a new service named "'+name+'".');
 	},
@@ -120,6 +133,13 @@ ServiceLocator.prototype = {
 			return this._services[name] = factory(this);
 		}
 
+    //check for a locator to get a shared instance of the service
+    for (var i=0; i<this._locators.length; ++i) {
+      if (this._locators[i].has(name)) {
+        return this._locators[i].get(name);
+      }
+    }
+
 		throw new Error('Cannot locate a service named "'+name+'".');
 	},
 
@@ -159,7 +179,22 @@ ServiceLocator.prototype = {
 		this._factories[name] = factory;
 
 		return this;
-	}
+	},
+
+  /**
+   * Store a parent locator to look for services in
+   * @param   {ServiceLocator} locator    The locator
+   * @returns {ServiceLocator}
+   */
+  locator: function(locator) {
+
+    //check the service doesn't already exist
+    if (this._locators.indexOf(locator) === -1) {
+      this._locators.push(locator);
+    }
+
+    return this;
+  }
 
 };
 

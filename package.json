@@ -1,4 +1,29 @@
 {
   "name": "service-oracle",
-  "version": "0.2.2"
+  "version": "0.3.0",
+  "description": "A service locator.",
+  "keywords": [
+    "service",
+    "locator",
+    "registry",
+    "container",
+    "di",
+    "inject"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git@github.com:digitaledgeit/js-service-oracle.git"
+  },
+  "bugs": {
+    "url": "https://github.com/digitaledgeit/js-service-oracle/issues"
+  },
+  "devDependencies": {
+    "mocha": "^2.2.5",
+    "mocha-istanbul": "^0.2.0"
+  },
+  "scripts": {
+    "test": "mocha",
+    "cover": "istanbul cover _mocha -i index.js --dir test/results"
+  },
+  "license": "MIT"
 }
