@@ -1,21 +1,14 @@
-# service-oracle
+# locator
 
-A service locator. 
-
-The all-knowing Oracle knows *all* about your services!
-
-### This project is a Work In Progress. Here be dragons!
-
-<small>Crap name I know, `service-locator` was taken but you can suggest something better.</small>
-
+A service locator.
 
 ## Installation
 
-    npm install --save service-oracle
+    npm install --save @iso/locator
     
 ## Usage
     
-    var locator = require('service-oracle');
+    var locator = require('@iso/locator');
     
     //setup your services
     var services = locator()
@@ -45,8 +38,6 @@ The all-knowing Oracle knows *all* about your services!
     
     //somewhere else e.g. in your express routes
     var service = services.get('BlogService');
-    
-
 
 ## API
 
