@@ -4,11 +4,11 @@ A service locator.
 
 ## Installation
 
-    npm install --save @iso/locator
+    npm install --save iso-locator
     
 ## Usage
     
-    var locator = require('@iso/locator');
+    var locator = require('iso-locator');
     
     //setup your services
     var services = locator()

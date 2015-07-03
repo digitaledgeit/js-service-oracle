@@ -1,7 +1,7 @@
 {
-  "name": "@iso/locator",
+  "name": "iso-locator",
   "version": "0.3.3",
-  "description": "A service locator.",
+  "description": "A simple service locator for isomorphic apps.",
   "keywords": [
     "service",
     "locator",
