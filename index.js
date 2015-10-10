@@ -2,42 +2,49 @@
 /**
  * A service locator
  * @constructor
- * @returns {ServiceLocator}
+ * @returns {ServiceOracle}
  */
-function ServiceLocator() {
+function ServiceOracle() {
 
-	if (!(this instanceof ServiceLocator)) {
-		return new ServiceLocator();
+  //create a new instance when the constructor is called as a normal method
+	if (!(this instanceof ServiceOracle)) {
+		return new ServiceOracle();
 	}
 
-	this._services  = [];
-	this._factories = [];
+  /**
+   * The service instances
+   * @private
+   * @type {Object}
+   */
+	this._instances = {};
+
+  /**
+   * The service factories
+   * @private
+   * @type {Object}
+   */
+	this._factories = {};
+
+  /**
+   * The service locators
+   * @private
+   * @type {Object}
+   */
   this._locators  = [];
 
 }
 
-/**
- * Creates a new service locator
- * @param   {function(ServiceLocator)} [bootstrap]
- * @returns {ServiceLocator}
- */
-ServiceLocator.create = function(bootstrap) {
-	var locator = new ServiceLocator();
-	if (bootstrap) bootstrap(locator);
-	return locator;
-};
-
-ServiceLocator.prototype = {
+ServiceOracle.prototype = {
 
 	/**
-	 * Check whether a service exists in the service locator
+	 * Check whether a service can be retrieved from the service locator
 	 * @param   {string}                            name       The service name
 	 * @returns {boolean}
 	 */
 	has: function(name) {
 
 		//check for an existing instance of the service
-		if (Object.keys(this._services).indexOf(name) !== -1) {
+		if (Object.keys(this._instances).indexOf(name) !== -1) {
 			return true;
 		}
 
@@ -47,15 +54,17 @@ ServiceLocator.prototype = {
 		}
 
     //check for a locator with an instance of the service
-    if (Object.keys(this._locators).indexOf(name) !== -1) {
-      return true;
+    for (var i=0; i<this._locators.length; ++i) {
+      if (this._locators[i].has(name)) {
+        return true;
+      }
     }
 
 		return false;
 	},
 
 	/**
-	 * Retrieve a new instance of a service from the service locator - can only be used for services created via a factory
+	 * Retrieve a *NEW* instance of a service from the service locator - only works for services created via a factory
 	 * @param   {string}                            name       The service name
 	 * @returns {*}
 	 */
@@ -104,8 +113,8 @@ ServiceLocator.prototype = {
 	get: function(name) {
 
 		//check for an existing instance of the service
-		if (Object.keys(this._services).indexOf(name) !== -1) {
-			return this._services[name];
+		if (Object.keys(this._instances).indexOf(name) !== -1) {
+			return this._instances[name];
 		}
 
 		//check for a factory to create a new instance of the service
@@ -130,7 +139,7 @@ ServiceLocator.prototype = {
 			}
 
 			//run the factory, create an instance of the service and store it for next time
-			return this._services[name] = factory(this);
+			return this._instances[name] = factory(this);
 		}
 
     //check for a locator to get a shared instance of the service
@@ -147,9 +156,9 @@ ServiceLocator.prototype = {
 	 * Store a service in the service locator
 	 * @param   {string}                            name       The service name
 	 * @param   {*}                                 service    The service instance
-	 * @returns {ServiceLocator}
+	 * @returns {ServiceOracle}
 	 */
-	set: function(name, service) {
+	instance: function(name, service) {
 
 		//check the service doesn't already exist
 		if (this.has(name)) {
@@ -157,7 +166,7 @@ ServiceLocator.prototype = {
 		}
 
 		//store the service
-		this._services[name] = service;
+		this._instances[name] = service;
 
 		return this;
 	},
@@ -165,8 +174,8 @@ ServiceLocator.prototype = {
 	/**
 	 * Store a factory in the service locator
 	 * @param   {string}                            name       The service name
-	 * @param   {string|function(ServiceLocator):*} factory    The service instance
-	 * @returns {ServiceLocator}
+	 * @param   {string|function(ServiceOracle):*} factory    The service instance
+	 * @returns {ServiceOracle}
 	 */
 	factory: function(name, factory) {
 
@@ -182,9 +191,9 @@ ServiceLocator.prototype = {
 	},
 
   /**
-   * Store a parent locator to look for services in
-   * @param   {ServiceLocator} locator    The locator
-   * @returns {ServiceLocator}
+   * Store a locator in the service locator
+   * @param   {ServiceOracle} locator    The locator
+   * @returns {ServiceOracle}
    */
   locator: function(locator) {
 
@@ -198,4 +207,4 @@ ServiceLocator.prototype = {
 
 };
 
-module.exports = ServiceLocator;
+module.exports = ServiceOracle;

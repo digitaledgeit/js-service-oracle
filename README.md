@@ -1,18 +1,22 @@
-# locator
+# service-oracle
 
-A service locator.
+[![Build Status](https://secure.travis-ci.org/digitaledgeit/service-oracle.png?branch=master)](http://travis-ci.org/digitaledgeit/service-oracle)
+
+A service locator for NodeJS and the browser.
+
+The all-knowing Oracle knows how to construct your services!
 
 ## Installation
 
-    npm install --save iso-locator
+    npm install --save service-oracle
     
 ## Usage
     
-    var locator = require('iso-locator');
+    var locator = require('service-oracle');
     
     //setup your services
     var services = locator()
-    	.set('Config', require('./config.json'))
+    	.instance('Config', require('./config.json'))
     	.factory('Database', function(locator) {
     		var config    = locator.get('Config');
     		var database  = new Database(config.db);
@@ -37,57 +41,52 @@ A service locator.
     ;
     
     //somewhere else e.g. in your express routes
-    var service = services.get('BlogService');
+    var blog = services.get('BlogService');
 
 ## API
 
 ### Methods
 
-#### new ServiceLocator()
+#### new ServiceOracle()
 
 Create a new service locator.
 
 #### .has(name : string) : boolean
 
-Check whether a service exists.
+Check whether a service can be located.
 
 #### .new(name : string) : *
 
 Create a new instance of a service.
 
-**Note**: Cannot be a service set with `.set()`
+**Note**: Cannot be a service registered using the `.instance()` method.
 
 #### .get(name : string) : *
 
 Get a shared instance of a service.
 
-#### .set(name : string, value : *) : ServiceLocator
+#### .instance(name : string, value : *) : ServiceOracle
 
-Set a shared instance of a service.
+Register a shared instance of a service.
 
-#### .factory(name : string, value : string|function(ServiceLocator) : ServiceLocator
+#### .factory(name : string, value : string|function : ServiceOracle
 
-Set a function or module path as a service factory.
+Register a function or module path as a service factory.
 
-#### .locator(locator : ServiceLocator) : ServiceLocator
+#### .locator(locator : ServiceOracle) : ServiceOracle
 
-Look for services in another locator too.
- 
-## TODO:
-- async factories?
-- documentation:
-    - What should I store in the locator?
-    - What kind of services should I use it?
-    - What about dependency injection?
+Register another locator to to locate services in.
+
+## Changelog
+
+v1.0.0
+
+- changed `.set(name, instance)` to `.instance(name, instance)`
+- added missing tests
+- updated documentation
 
 ## License
 
 The MIT License (MIT)
 
 Copyright (c) 2015 James Newell
-
-Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
-
-The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
-
-THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.

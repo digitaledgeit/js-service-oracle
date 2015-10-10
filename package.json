@@ -1,14 +1,15 @@
 {
-  "name": "iso-locator",
-  "version": "0.3.3",
-  "description": "A simple service locator for isomorphic apps.",
+  "name": "service-oracle",
+  "version": "1.0.0",
+  "description": "A service locator for NodeJS and the browser.",
   "keywords": [
     "service",
     "locator",
     "registry",
     "container",
     "di",
-    "inject"
+    "inject",
+    "pattern"
   ],
   "repository": {
     "type": "git",
@@ -18,12 +19,14 @@
     "url": "https://github.com/iso-js/locator/issues"
   },
   "devDependencies": {
+    "coveralls": "^2.11.4",
     "mocha": "^2.2.5",
     "mocha-istanbul": "^0.2.0"
   },
   "scripts": {
     "test": "mocha",
-    "cover": "istanbul cover _mocha -i index.js --dir test/results"
+    "coverage": "istanbul cover _mocha -i index.js --dir test/__coverage__",
+    "coveralls": "npm run-script coverage && coveralls < test/__coverage__/lcov.info"
   },
   "license": "MIT"
 }
