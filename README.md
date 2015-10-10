@@ -1,5 +1,6 @@
 # service-oracle
 
+[![Build Status](https://travis-ci.org/digitaledgeit/service-oracle.svg?branch=master)](https://travis-ci.org/digitaledgeit/service-oracle)
 [![Build Status](https://secure.travis-ci.org/digitaledgeit/service-oracle.png?branch=master)](http://travis-ci.org/digitaledgeit/service-oracle)
 
 A service locator for NodeJS and the browser.
