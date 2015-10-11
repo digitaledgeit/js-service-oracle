@@ -25,8 +25,8 @@
   },
   "scripts": {
     "test": "mocha",
-    "coverage": "istanbul cover _mocha -i index.js --dir test/__coverage__",
-    "coveralls": "npm run-script coverage && coveralls < test/__coverage__/lcov.info"
+    "coverage": "istanbul cover _mocha --report html --dir test/__coverage__",
+    "coveralls": "istanbul cover _mocha --report lcovonly --dir test/__coverage__ && coveralls < test/__coverage__/lcov.info"
   },
   "license": "MIT"
 }
