@@ -1,7 +1,7 @@
 # service-oracle
 
 [![Build Status](https://travis-ci.org/digitaledgeit/service-oracle.svg?branch=master)](https://travis-ci.org/digitaledgeit/service-oracle)
-[![Build Status](https://secure.travis-ci.org/digitaledgeit/service-oracle.png?branch=master)](http://travis-ci.org/digitaledgeit/service-oracle)
+[![Coverage Status](https://coveralls.io/repos/digitaledgeit/service-oracle/badge.svg?branch=master&service=github)](https://coveralls.io/github/digitaledgeit/service-oracle?branch=master)
 
 A service locator for NodeJS and the browser.
 
