@@ -13,10 +13,10 @@
   ],
   "repository": {
     "type": "git",
-    "url": "git@github.com:iso-js/locator.git"
+    "url": "git@github.com:digitaledgeit/service-oracle.git"
   },
   "bugs": {
-    "url": "https://github.com/iso-js/locator/issues"
+    "url": "https://github.com/digitaledgeit/service-oracle/issues"
   },
   "devDependencies": {
     "coveralls": "^2.11.4",
