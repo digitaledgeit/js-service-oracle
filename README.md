@@ -72,11 +72,11 @@ Register a shared instance of a service.
 
 #### .factory(name : string, value : string|function : ServiceOracle
 
-Register a function or module path as a service factory.
+Register a function or module path as a factory for creating services.
 
 #### .locator(locator : ServiceOracle) : ServiceOracle
 
-Register another locator to to locate services in.
+Register another locator to proxy service location to.
 
 ## Changelog
 
