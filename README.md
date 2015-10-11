@@ -60,7 +60,7 @@ Check whether a service can be located.
 
 Create a new instance of a service.
 
-**Note**: Cannot be a service registered using the `.instance()` method.
+**Note**: Cannot create a new instance of a service registered with the `.instance()` method.
 
 #### .get(name : string) : *
 
